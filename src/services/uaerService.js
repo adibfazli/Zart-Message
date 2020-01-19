@@ -5,8 +5,32 @@ export default {
   signup,
   getUser,
   logout,
-  login
+  login,
+  editUserName,
+  showUser
 };
+
+function showUser() {
+  return fetch(BASE_URL + 'user', {
+    method: 'GET',
+    headers: {Authorization: 'Bearer' + tokenService.getToken()}
+  }).then(async res => {
+    console.log('inside show user in services')
+    console.log("res: ", res)
+    // console.log("res.json()", res.json())
+    // return res.json()
+    return res.json()
+  }
+  );
+}
+
+function editUserName(name) {
+  return fetch (BASE_URL + 'editUser', {
+    method: 'PUT',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify(name)
+  })
+}
 
 function login(creds) {
   return fetch(BASE_URL + 'login', {
@@ -34,6 +58,7 @@ function signup(user) {
     body: JSON.stringify(user)
   })
   .then(res => {
+    console.log(res.json())
     if (res.ok) return res.json();
     // Probably a duplicate email
     // err

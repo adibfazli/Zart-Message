@@ -6,6 +6,7 @@ import userService from "../../services/uaerService";
 import MessageFeed from "../../components/MessageFeed/MessageFeed";
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
+import EditUserPage from '../EditUser/EditUser'
 
 class App extends Component {
   constructor() {
@@ -39,6 +40,11 @@ class App extends Component {
             <LoginPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
+            />
+          }/>
+          <Route exact path='/editUser' render={({ history }) => 
+            <EditUserPage
+              history={history}
             />
           }/>
         </Switch>

@@ -4,8 +4,27 @@ const SECRET = process.env.SECRET;
 
 module.exports = {
     signup,
-    login
+    login,
+    editUser,
+    getUser
   };
+
+  async function getUser(req, res) {
+    console.log("req.user: ", req.user);
+    console.log('inside get user method in controller')
+    const user = {
+      name: "Meisam",
+      password: "abc123"
+    }
+    return res.json(user)
+  }
+
+  function editUser (req, res) {
+    console.log("Ctrl: ",req.body)
+    
+  }
+
+
   
   async function login(req, res) {
     try {
