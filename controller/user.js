@@ -54,11 +54,14 @@ module.exports = {
       res.status(400).json(err);
     }
   }
-
-function createJWT(user) {
+  
+  
+  /*--- helper functions ---*/
+  
+  function createJWT(user) {
     return jwt.sign(
-        {user},
-        SECRET,
-        {expiresIn: '24h'}
-    )
-}
+      {user},
+      SECRET,
+      {expiresIn: '24h'}
+    );
+  }

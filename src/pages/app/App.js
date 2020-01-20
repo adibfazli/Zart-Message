@@ -3,10 +3,12 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import userService from "../../services/uaerService";
-import MessageFeed from "../../components/MessageFeed/MessageFeed";
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import EditUserPage from '../EditUser/EditUser'
+import ChatRooms from '../../components/ChatRooms/ChatRooms'
+import Chat from '../../components/Chat/Chat'
+import socket from '../../socket';
 
 class App extends Component {
   constructor() {
@@ -20,16 +22,23 @@ class App extends Component {
     this.setState({user: userService.getUser()});
   }
 
+  componentDidMount () {
+    
+  }
+
   render() {
     return (
       <>
         <Switch>
           <Route exact path="/" render={() => 
-            <NavBar user={this.state.user} />}
-          />
-          <Route exact path="/message" render={() => 
-            <MessageFeed />} 
-          />
+            <>
+                <NavBar user={this.state.user} />
+              <div className='chatroom-chat'>
+                <ChatRooms />
+                <Chat />
+              </div>
+            </>
+          } />
           <Route exact path='/signup' render={({ history }) => 
             <SignupPage
               history={history}

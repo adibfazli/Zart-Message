@@ -13,7 +13,7 @@ export default {
 function showUser() {
   return fetch(BASE_URL + 'user', {
     method: 'GET',
-    headers: {Authorization: 'Bearer' + tokenService.getToken()}
+    headers: {Authorization: 'Bearer ' + tokenService.getToken()}
   }).then(async res => {
     console.log('inside show user in services')
     console.log("res: ", res)
