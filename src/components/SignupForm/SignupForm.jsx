@@ -8,6 +8,7 @@ class SignupForm extends Component {
     name: '',
     email: '',
     password: '',
+    phone:'',
     passwordConf: ''
   };
 
@@ -50,6 +51,11 @@ class SignupForm extends Component {
           <div className="form-group">
             <div className="col-sm-12">
               <input type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="col-sm-12">
+              <input type="number" className="form-control" placeholder="Phone Number" value={this.state.phone} name="phone" onChange={this.handleChange} />
             </div>
           </div>
           <div className="form-group">

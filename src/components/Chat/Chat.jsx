@@ -9,21 +9,26 @@ class Chat extends React.Component {
 
     state = {
         content: [],
-        chatBox: ''
+        chatBox: '',
+        
     }
-    handleClick = (e) => {
+    // handle          > Click <
+    handleSendMessage = (e) => {
         e.preventDefault();
         let content = this.state.content;
         content.push({
             user: service.getUser(),
             message: this.state.chatBox
         })
-        socket.submitClicked(content)
+        socket.sendClicked(content)
     }
 
+    // handle          > Change <
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
+
+    //             componant Functions
     componentDidMount() {
         socket.registerApp(this);
     }
@@ -37,7 +42,7 @@ class Chat extends React.Component {
             {this.state.content ? 
                 <ul>
                     {this.state.content.map (c => 
-                        <li>
+                        <li key={c.message + c.user.name}>
                             {c.user.name}:&nbsp;{c.message}
                         </li>
                     )}
@@ -45,9 +50,9 @@ class Chat extends React.Component {
                 : <p>nothing in there</p>
         }
             </div>
-            <form onSubmit={this.handleClick}>
+            <form onSubmit={this.handleSendMessage}>
                 <input type="text" name="chatBox" value={this.state.name} onChange={this.handleChange}/>
-                <button type='submit' >submit</button>
+                <button type='submit'>submit</button>
             </form>
         </div>
         );

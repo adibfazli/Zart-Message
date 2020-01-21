@@ -7,7 +7,8 @@ export default {
   logout,
   login,
   editUserName,
-  showUser
+  showUser,
+  // searchUser,
 };
 
 function showUser() {
@@ -23,7 +24,7 @@ function showUser() {
   }
   );
 }
-
+//////////////////////////////
 function editUserName(name) {
   return fetch (BASE_URL + 'editUser', {
     method: 'PUT',
@@ -32,6 +33,17 @@ function editUserName(name) {
   })
 }
 
+// function searchUser(search){
+//   return fetch (BASE_URL + 'search', {
+//     method: 'POST',
+//     headers: new Headers({'Content-Type': 'application/json'}),
+//     body: JSON.stringify(search)
+//   }).then(res => {
+//     if (res.ok) return res.json();
+//     throw new Error('bad search!!');
+//   })
+// }
+//////////////////////////////
 function login(creds) {
   return fetch(BASE_URL + 'login', {
     method: 'POST',
@@ -56,14 +68,12 @@ function signup(user) {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(user)
-  })
-  .then(res => {
+  }).then(res => {
     console.log(res.json())
     if (res.ok) return res.json();
     // Probably a duplicate email
     // err
     throw new Error('Email already taken!');
-  })
-  .then(({token}) => tokenService.setToken(token));
+  }).then(({token}) => tokenService.setToken(token));
 }
 

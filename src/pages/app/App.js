@@ -26,13 +26,21 @@ class App extends Component {
     
   }
 
+  handleLogout = () => {
+    userService.logout();
+    this.setState({user: null});
+  }
+
   render() {
     return (
       <>
         <Switch>
           <Route exact path="/" render={() => 
             <>
-                <NavBar user={this.state.user} />
+                <NavBar 
+                  user={this.state.user} 
+                  handleLogout={this.handleLogout}
+                />
               <div className='chatroom-chat'>
                 <ChatRooms />
                 <Chat />

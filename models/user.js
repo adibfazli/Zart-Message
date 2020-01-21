@@ -1,18 +1,26 @@
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 6;
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   name: String,
   email: {type: String, required: true, lowercase: true, unique: true},
-  password: String
+  phone: Number,
+  password: String,
+  chats : [{
+    type: Schema.Types.ObjectId,
+    ref: "Chat"
+  }],
 }, {
   timestamps: true
 });
+/////////////////////////////////////
 
 userSchema.set('toJSON', {
   transform: function(doc, ret) {
-    // remove the password property when serializing doc to JSON
+    // remove the password property 
+    // when serializing doc to JSON
     delete ret.password;
     return ret;
   }

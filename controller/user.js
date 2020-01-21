@@ -6,7 +6,8 @@ module.exports = {
     signup,
     login,
     editUser,
-    getUser
+    getUser,
+    searchUser,
   };
 
   async function getUser(req, res) {
@@ -17,6 +18,12 @@ module.exports = {
       password: "abc123"
     }
     return res.json(user)
+  }
+
+  async function searchUser(req , res){
+    const user = await User.findOne({phone : req.body.search})
+    console.log('search user : ' , user)
+    if(user) return res.json(user)
   }
 
   function editUser (req, res) {
