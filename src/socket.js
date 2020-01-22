@@ -11,7 +11,7 @@ function registerApp(app) {
 function registerChatrooms(app){
     chatroomsPage = app
 }
-//-----------------------------------------------------
+//------------------------click-submit----------------
 function sendClicked(content) {
     const token = tokenService.getToken();
     socket.emit('click-submit', content)
@@ -27,8 +27,9 @@ function searchUser (phoneNum){
     const token = tokenService.getToken();
     socket.emit('search-user-start-chat',phoneNum , token)
 }
-socket.on('search-user-start-chat' , function(chat){
-    chatroomsPage.setState({latestChat: chat})
+socket.on('search-user-start-chat' , function(user){
+    console.log(user.chats)
+    chatroomsPage.setState({latestChat: user.chats})
 });
 
 //---------------------------------------------------

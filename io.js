@@ -12,9 +12,8 @@ module.exports = {
 }
 
 // ------------------function for finding all the chats for the user-------
-function findUserChat(){
-    chat.find({})
-
+function findUserChat(user){
+    
 }
 
 function init(http) {
@@ -34,7 +33,7 @@ function init(http) {
        //-----------------------search-user-start-chat--------------------------
        socket.on('search-user-start-chat', async function(phoneNum , token){
             const user = await JSON.parse(atob(token.split('.')[1])).user;
-            User.findOne({_id : user._id} , function (err , sender){
+            User.findOne({_id : user._id}).populate('chats').exec( function (err , sender){
                 User.findOne({phone : phoneNum.search} , function(err , reciver){
                     Chat.create(new Chat , function(err , chat){
                         chat.users.push(sender._id);
@@ -45,8 +44,8 @@ function init(http) {
                         reciver.save()
                         chat.save()
                         socket.join(chat._id, function() {
-                            io.to(chat._id).emit('search-user-start-chat', chat);
-                        });
+                        io.to(chat._id).emit('search-user-start-chat', sender);
+                        })
                     });
                 })
             })

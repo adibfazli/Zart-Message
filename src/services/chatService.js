@@ -2,21 +2,22 @@ import tokenService from'./tokenService';
 const BASE_URL = '/api/users/';
 
 export default {
-    // findUsersChats,
+    getAllChats,
     // findClickedChat,
 
 };
 
-// function findUsersChats(user){
-//     return fetch (BASE_URL + 'allChats', {
-//         method: 'POST',
-//         headers: new Headers({'Content-Type': 'application/json'}),
-//         body: JSON.stringify(user)
-//           }).then(res => {
-//             if (res.ok) return res.json();
-//             throw new Error('bad search!!');
-//           })
-// }
+function getAllChats(user){
+    return fetch (BASE_URL + 'allChats', {
+        method: 'POST',
+        headers: new Headers({'Content-Type': 'application/json', 'Accept' : 'application/json'}),
+        body: JSON.stringify(user)
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            console.log(data, "THIS IS DATA!!!!")
+        })
+}
 
 function findClickedChat(){
 

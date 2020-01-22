@@ -36,8 +36,11 @@ class ChatRooms extends Component{
 
     //////////////////////////////////
 
-    componentDidMount() {
+    componentDidMount = async() => {
         socket.registerChatrooms(this);
+        // console.log("here : ",await  ChatService.getAllChats(this.state.user))
+        const latestChat = await ChatService.getAllChats(this.state.user)
+        this.setState({latestChat: latestChat})
     }
 
     render(){
@@ -52,13 +55,13 @@ class ChatRooms extends Component{
 
                 </div>
                 <div className={styles.chatRooms}>
-                    {this.state.searchResults ?
+                    {this.state.latestChat ?
                         <ul>
-                        {this.state.user.chat.forEach(e => {
+                        {/* {this.state.latestChat.map(e => {
                             return (<li>
-                                <button onClick={this.handleChatClick} value={e._id} > {e._id} </button>
+                                <button onClick={this.handleChatClick} value={Object.values(e)[0]} > This is ID: {Object.keys(e)[0]} </button>
                             </li>)
-                        })}
+                        })} */}
                     </ul>
                     : <p>nothing in here</p>
                     }
