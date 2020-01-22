@@ -12,7 +12,8 @@ class Chat extends React.Component {
         chatBox: '',
         
     }
-    // handle          > Click <
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    //                    handle > Click <
     handleSendMessage = (e) => {
         e.preventDefault();
         let content = this.state.content;
@@ -23,16 +24,23 @@ class Chat extends React.Component {
         socket.sendClicked(content)
     }
 
-    // handle          > Change <
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    //                      handle > Change <
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    //             componant Functions
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    //                   componant Functions
     componentDidMount() {
         socket.registerApp(this);
     }
 
+    messageReciver = (e)=>{
+
+    }
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    //                         render
     render () {
         return (
         <div className={styles.chat}>

@@ -1,24 +1,34 @@
 import tokenService from'./tokenService';
+import chat from '../components/Chat/Chat'
 const BASE_URL = '/api/users/';
 
 export default {
     getAllChats,
-    // findClickedChat,
+    findClickedChat,
 
 };
 
-function getAllChats(user){
-    return fetch (BASE_URL + 'allChats', {
+async function getAllChats(user){
+    return await fetch (BASE_URL + 'allChats', {
         method: 'POST',
-        headers: new Headers({'Content-Type': 'application/json', 'Accept' : 'application/json'}),
+        headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify(user)
         }).then(res => {
             return res.json()
         }).then(data => {
-            console.log(data, "THIS IS DATA!!!!")
+            return data
         })
 }
 
-function findClickedChat(){
-
+function findClickedChat(id){
+    console.log(id)
+    return fetch (BASE_URL + 'chatSelected',{
+        method: 'POST',
+        header: new Headers({'Content-Type': 'application/json', 'Accept' : 'application/json'}),
+        body: JSON.stringify(id)
+    }).then(res => {
+        return res.json()
+    }).then(data => {
+         chat.messageReciver(data)
+    })
 }
