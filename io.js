@@ -35,6 +35,9 @@ function init(http) {
             const user = await JSON.parse(atob(token.split('.')[1])).user;
             User.findOne({_id : user._id}).populate('chats').exec( function (err , sender){
                 User.findOne({phone : phoneNum.search} , function(err , reciver){
+                    // if (sender.chats.forEach( chat =>{ chat.users.includes(reciver._id) }) ){
+                    //     return
+                    // }   
                     Chat.create(new Chat , function(err , chat){
                         chat.users.push(sender._id);
                         chat.users.push(reciver._id);

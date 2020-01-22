@@ -31,17 +31,18 @@ class ChatRooms extends Component{
     }
 
     handleChatClick = async (e) =>{
+        e.preventDefault();
         this.setState({clickedChatId : e.target.value})
-        this.setState({clickedChatId : this.state.clickedChatId})
+        this.setState({chatsId : [this.state.clickedChatId]})
 
-        await chatService.findClickedChat(this.state)
+        await chatService.findClickedChat(this.state.chatsId)
     }
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
     componentDidMount = async() => {
         socket.registerChatrooms(this);
-        console.log("here : ",await  ChatService.getAllChats(this.state.user))
+        // console.log("here : ",await  ChatService.getAllChats(this.state.user))
         const latestChat = await ChatService.getAllChats(this.state.user)
         this.setState({latestChat: latestChat})
     }

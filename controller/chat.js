@@ -8,8 +8,10 @@ module.exports = {
   };
 
   function allChats(req , res){
+    
     let chatNameAndId = []
     User.findById(req.body._id,  function(err , user){
+      // if(user.chats.length){
        user.chats.forEach( chatId =>{
          Chat.findById(chatId ,  function(err , chat){
           let result
@@ -20,11 +22,13 @@ module.exports = {
           })
         })
       })
+    // }
     });
   }
 
 function chatSelected(req,res){
-  chat.findById(req.chatId).populate('message').exec( function(err , chatMessage){
-    return res.json(chatMessage.message)
+  console.log("chat ctrl",req)
+  Chat.findById(req.chatId).populate('message').exec( function(err , chatMessage){
+    // return res.json(chatMessage.message)
   })
 }

@@ -8,7 +8,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import EditUserPage from '../EditUser/EditUser'
 import ChatRooms from '../../components/ChatRooms/ChatRooms'
 import Chat from '../../components/Chat/Chat'
-import socket from '../../socket';
+// import socket from '../../socket';
 
 class App extends Component {
   constructor() {
@@ -21,7 +21,7 @@ class App extends Component {
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
   }
-
+  
   componentDidMount () {
     
   }

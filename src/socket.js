@@ -13,7 +13,7 @@ function registerChatrooms(app){
 }
 //------------------------click-submit----------------
 function sendClicked(content) {
-    const token = tokenService.getToken();
+    // const token = tokenService.getToken();
     socket.emit('click-submit', content)
 }
 socket.on ('click-submit', function(content) {
