@@ -22,6 +22,11 @@ class ChatRooms extends Component{
     handleChange = (e) => {
         this.setState({[e.target.name] : e.target.value})
     }
+    
+    handleChatClick = async (e) =>{
+        this.setState({clickedChatId : e.target.value})
+        this.findClickedChat()
+    }
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     //                     handle Submit
     handleSubmit = async (e) => {
@@ -29,12 +34,9 @@ class ChatRooms extends Component{
         this.setState({search: this.state.search})
         await socket.searchUser(this.state)
     }
-
-    handleChatClick = async (e) =>{
-        e.preventDefault();
-        this.setState({clickedChatId : e.target.value})
-        this.setState({chatsId : [this.state.clickedChatId]})
-
+    findClickedChat = async (e) =>{
+        this.state.chatsId =  [this.state.clickedChatId]
+        console.log("chat clicked : " ,this.state.chatsId )
         await chatService.findClickedChat(this.state.chatsId)
     }
 
@@ -54,13 +56,13 @@ class ChatRooms extends Component{
             <div className={styles.chatroom}>
                 <div className={styles.search}>
 
-                    <form onSubmit={this.handleSubmit} >
-                        <input type="text" placeholder='search' name='search' value={this.state.name} onChange={this.handleChange} />
-                        <button type='submit'>search</button>
+                    <form onSubmit={this.handleSubmit} className={styles.searchForm} >
+                        <input type="text" placeholder='search' className={styles.searchInput} name='search' value={this.state.name} onChange={this.handleChange} />
+                        <button type='submit' className={styles.searchBtn}>&#128269;</button>
                     </form>
 
                 </div>
-                <div className={styles.chatRooms}>
+                <div className={styles.chats}>
                     {this.state.latestChat ?
                         <ul>
                             {this.state.latestChat.map(e => {

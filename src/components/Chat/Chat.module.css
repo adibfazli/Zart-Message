@@ -1,10 +1,30 @@
 .MessageFeed{
-    border: 1px solid black;
+    border-top: 2px solid rgb(172, 172, 172);
+    border-bottom: 2px solid rgb(172, 172, 172);
     height:80vh
 }
 .chat{
-    border: 1px solid black
+    border: 1px solid rgb(172, 172, 172)
   }
 .chatInfo{
-    height: 10vh;
+    height: 13vh;
+}
+
+.messageInput{
+    border-top-left-radius : 20px;
+    border-bottom-left-radius : 20px;
+    height: 30px;
+    width:85%;
+    font-size: 20px;
+}
+.sendBtn{
+    border-top-right-radius : 20px;
+    border-bottom-right-radius : 20px;
+    height: 34px;
+    color: rgb(92, 92, 92);
+    background-color: white;
+}
+.sendForm{
+    margin-top: 2%;
+    margin-left: 2%;
 }

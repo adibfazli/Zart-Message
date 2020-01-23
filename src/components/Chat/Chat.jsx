@@ -58,9 +58,9 @@ class Chat extends React.Component {
                 : <p>nothing in there</p>
         }
             </div>
-            <form onSubmit={this.handleSendMessage}>
-                <input type="text" name="chatBox" value={this.state.name} onChange={this.handleChange}/>
-                <button type='submit'>submit</button>
+            <form onSubmit={this.handleSendMessage} className={styles.sendForm}>
+                <input type="text" name="chatBox" value={this.state.name} onChange={this.handleChange} className={styles.messageInput}/>
+                <button type='submit' className={styles.sendBtn}>submit</button>
             </form>
         </div>
         );

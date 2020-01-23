@@ -11,7 +11,7 @@ export default {
 async function getAllChats(user){
     return await fetch (BASE_URL + 'allChats', {
         method: 'POST',
-        header: new Headers({'Content-Type': 'application/json', 'Accept' : 'application/json'}),
+        headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify(user)
         }).then(res => {
             return res.json()
@@ -24,7 +24,7 @@ function findClickedChat(id){
     // console.log(id)
     return fetch (BASE_URL + 'chatSelected',{
         method: 'POST',
-        header: new Headers({'Content-Type': 'application/json', 'Accept' : 'application/json'}),
+        headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify(id)
     }).then(res => {
         return res.json()

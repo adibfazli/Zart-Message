@@ -1,11 +1,32 @@
-.chatRooms{
-    border: 1px solid black;
+.chats{
+    border-top: 2px solid rgb(172, 172, 172);
     height: 90vh;
 }
 .chatroom{
-    border: 1px solid black;
+    border: 1px solid rgb(172, 172, 172);
     
   }
 .search{
     height: 10vh;
+}
+.searchInput{
+    border-top-left-radius : 20px;
+    border-bottom-left-radius : 20px;
+    height: 30px;
+    width:65%;
+}
+.searchBtn{
+    border-top-right-radius : 20px;
+    border-bottom-right-radius : 20px;
+    height: 34px;
+    color: rgb(92, 92, 92);
+    background-color: white;
+}
+.searchBtn:hover{
+    background-color: rgb(239, 247, 255);
+    color: black;
+}
+.searchForm{
+    margin-top: 6%;
+    margin-left: 7%;
 }

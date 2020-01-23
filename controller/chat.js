@@ -11,7 +11,6 @@ module.exports = {
     
     let chatNameAndId = []
     User.findById(req.body._id,  function(err , user){
-      // if(user.chats.length){
        user.chats.forEach( chatId =>{
          Chat.findById(chatId ,  function(err , chat){
           let result
@@ -22,13 +21,16 @@ module.exports = {
           })
         })
       })
-    // }
     });
   }
 
-function chatSelected(req,res){
-  console.log("chat ctrl",req)
-  Chat.findById(req.chatId).populate('message').exec( function(err , chatMessage){
-    // return res.json(chatMessage.message)
-  })
-}
+  function chatSelected(req,res){
+    console.log("chat ctrl",req.body[0])
+    Chat.findById(req.body[0]).populate('message').exec( function(err , chatMessage){
+      chatMessage.populate('users').exec( (e) => {
+        console.log("E : ",e)
+
+      })
+      
+    })
+  }

@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch , Redirect} from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import userService from "../../services/uaerService";
 import SignupPage from '../SignupPage/SignupPage';
@@ -41,10 +41,14 @@ class App extends Component {
                   user={this.state.user} 
                   handleLogout={this.handleLogout}
                 />
+                {userService.getUser() ?
               <div className='chatroom-chat'>
                 <ChatRooms />
                 <Chat />
               </div>
+              :
+              <Redirect to='/login' />
+                }
             </>
           } />
           <Route exact path='/signup' render={({ history }) => 
