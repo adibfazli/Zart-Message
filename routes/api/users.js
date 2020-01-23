@@ -12,7 +12,7 @@ router.get('/findUser/:query', usersCtrl.findUser)
 router.put('/editUser', usersCtrl.editUser);
 router.get('/user', usersCtrl.getUser);
 router.post('/search' , usersCtrl.searchUser);
-router.post('/allChats' , chatCtrl.allChats);
+// router.post('/allChats' , chatCtrl.allChats);
 router.post('/chatSelected' , chatCtrl.chatSelected);
 
 module.exports = router;

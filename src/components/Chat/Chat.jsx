@@ -51,9 +51,10 @@ class Chat extends React.Component {
             {this.state.messages ? 
                 <ul>
                     {this.state.messages.map (message => 
-                        <li key={message._id}>
-                            {message.userName}:&nbsp;{message.content}
-                        </li>
+                        message.userName == uaerService.getUser().name ?
+                          <li className ={styles.greenChat} key={message._id}> <span className={styles.username}>{message.userName}:</span>&nbsp;<span>{message.content}</span> </li>
+                        : 
+                          <li className ={styles.whiteChat}Chat key={message._id} > <span className={styles.username}>{message.userName}:</span>&nbsp;<span>{message.content}</span> </li>
                     )}
                 </ul>    
                 : <p>nothing in there</p>

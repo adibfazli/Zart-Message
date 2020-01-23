@@ -4,7 +4,7 @@
 }
 .chatroom{
     border: 1px solid rgb(172, 172, 172);
-    
+    background-color: rgb(83, 83, 83);
   }
 .search{
     height: 10vh;
@@ -29,4 +29,28 @@
 .searchForm{
     margin-top: 6%;
     margin-left: 7%;
+}
+.chatBtn{
+    background-color:rgb(228, 244, 255);
+    width: 80%;
+    height: 30px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px;
+}
+.searchedUser{
+    background-color:rgb(228, 244, 255);
+    width: 66%;
+    height: 30px;
+    border-radius: 6px;
+    margin-top: 10px;
+    margin-left:7% ;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px;
+}
+ul{
+    list-style-type: none;
 }

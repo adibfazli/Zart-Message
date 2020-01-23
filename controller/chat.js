@@ -30,46 +30,29 @@ async function findChat (req, res) {
     user2.chats.push(chat);
     await user1.save();
     await user2.save();
-
-  } else {
-    chat = await Chat.findById(chat._id).populate('messages');
-  }
+    } else {
+      chat = await Chat.findById(chat._id).populate('messages');
+    }
   res.json(chat);
 }
 
-  function allChats(req , res){
-    
-    let chatNameAndId = []
-    User.findById(req.body._id,  function(err , user){
-       user.chats.forEach( chatId =>{
-         Chat.findById(chatId ,  function(err , chat){
-          let result
-           chat.users.indexOf(user._id) ? result = chat.users[0] : result = chat.users[1]
-           User.findById(result ,  function(err , reciver){
-             chatNameAndId.push({[reciver.name] : chatId})
-            if(user.chats.length == chatNameAndId.length) return res.json(chatNameAndId)
-          })
-        })
+  async function allChats(req , res){
+    chatIdAndReciver=[]
+    var user = await User.findOne({_id : req.body._id}).populate('chats')
+    await user.chats.forEach( async element => {
+      await User.findOne({_id : element.users.filter(el=> el != req.body._id)[0]} , function (err , reciver){
+        chatIdAndReciver.unshift({[reciver.name] : reciver._id})
+        if(user.chats.length == chatIdAndReciver.length) return res.json(chatIdAndReciver)
       })
-    });
-  }
-
-  function chatSelected(req,res){
-    console.log("chat ctrl",req.body[0])
-    Chat.findById(req.body[0]).populate('message').exec( function(err , chatMessage){
-      chatMessage.populate('users').exec( (e) => {
-        console.log("E : ",e)
-
-      })
-      
     })
   }
 
-
-
-
-
-
+  function chatSelected(req,res){
+    Chat.findById(req.body[0]).populate('message').exec( function(err , chatMessage){
+      chatMessage.populate('users').exec( (e) => {
+      })
+    })
+  }
 
   // help function
   function findExistedChat(user1, user2) {

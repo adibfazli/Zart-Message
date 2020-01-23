@@ -28,3 +28,14 @@
     margin-top: 2%;
     margin-left: 2%;
 }
+.greenChat{
+    background-color: rgba(0, 128, 0, 0.171);
+    margin-bottom: 10px;
+}
+.whiteChat{
+    margin-bottom: 10px;
+}
+.username{
+    color: rgb(94, 94, 94);
+    display: inline;
+}

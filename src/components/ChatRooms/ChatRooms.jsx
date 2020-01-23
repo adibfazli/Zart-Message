@@ -54,8 +54,8 @@ class ChatRooms extends Component{
         socket.registerChatrooms(this);
         socket.getLatestChats({userId: uaerService.getUser()._id});
         // console.log("here : ",await  ChatService.getAllChats(this.state.user))
-        const latestChat = await ChatService.getAllChats(this.state.user)
-        this.setState({latestChat: latestChat})
+        const latestChats = await ChatService.getAllChats(this.state.user)
+        this.setState({latestChats: latestChats})
     }
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -69,15 +69,15 @@ class ChatRooms extends Component{
                         <input type="number" placeholder='search' className={styles.searchInput} name='search' value={this.state.name} onChange={this.handleChange} />
                         <button type='submit' className={styles.searchBtn}>&#128269;</button>
                     </form>
-                    {this.state.foundUser ? <button onClick={() => this.handleOpenFoundChatroom(this.state.foundUser._id)}>{this.state.foundUser.name}</button> : <p>gg</p>}
+                    {this.state.foundUser ? <button className={styles.searchedUser} onClick={() => this.handleOpenFoundChatroom(this.state.foundUser._id)}>{this.state.foundUser.name}</button> : <p></p>}
                 </div>
                 <div className={styles.chats}>
                     {this.state.latestChats ?
-                        <ul>
+                        <ul className={styles}>
                             {this.state.latestChats.map(e => {
                                 return (
                                 <li>
-                                    <button onClick={this.handleChatClick} value={Object.values(e)[0]} >{Object.keys(e)[0]} </button>
+                                    <button className={styles.chatBtn} onClick={() => this.handleOpenFoundChatroom(Object.values(e)[0])} value={Object.values(e)[0]} >{Object.keys(e)[0]} </button>
                                 </li>)
                             })}
                         </ul>
