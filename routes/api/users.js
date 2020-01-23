@@ -4,9 +4,11 @@ const usersCtrl = require('../../controller/user');
 const chatCtrl = require('../../controller/chat')
 
 router.use(require("../../config/auth"));
+
 router.post('/signup', usersCtrl.signup);
 router.post('/login', usersCtrl.login);
-//
+router.get('/findUser/:query', usersCtrl.findUser)
+
 router.put('/editUser', usersCtrl.editUser);
 router.get('/user', usersCtrl.getUser);
 router.post('/search' , usersCtrl.searchUser);

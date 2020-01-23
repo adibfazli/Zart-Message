@@ -22,51 +22,34 @@ function init(http) {
     io.on('connection', function (socket) {
         
         console.log('connected to io');
-        //-------------------------------------------------
-        socket.on('click-submit', async function(content) {
-            console.log(content)
-            socket.join(content, function() {
-                io.to(content).emit("click-submit", content);
-            });
-        })
-        
-       //-----------------------search-user-start-chat--------------------------
-       socket.on('search-user-start-chat', async function(phoneNum , token){
-            const user = await JSON.parse(atob(token.split('.')[1])).user;
-            User.findOne({_id : user._id}).populate('chats').exec( function (err , sender){
-                User.findOne({phone : phoneNum.search} , function(err , reciver){
-                    // if (sender.chats.forEach( chat =>{ chat.users.includes(reciver._id) }) ){
-                    //     return
-                    // }   
-                    Chat.create(new Chat , function(err , chat){
-                        chat.users.push(sender._id);
-                        chat.users.push(reciver._id);
-                        sender.chats.push(chat._id);
-                        reciver.chats.push(chat._id);
-                        sender.save()
-                        reciver.save()
-                        chat.save()
-                        socket.join(chat._id, function() {
-                        io.to(chat._id).emit('search-user-start-chat', sender);
-                        })
-                    });
-                })
+        socket.on('get-user', async function({userId, token}) {
+            const loggedInUser = await validateToken(token);
+            if (!loggedInUser) return;
+
+            const User = await User.findById(userId).populate('chats');
+            socket.join(user._id, function() {
+                io.to(user._id).emit('get-users', user)
             })
-       });
 
-       //-------------------------------------------------
-       socket.on('chat-clicked', async function({ id, token }){
-            console.log(id)
-            const chat = await Chat.findById(id).populate("users");
-            const user = await validateToken(token);
-            if (!user) return;
+
+        })
+        socket.on('send-message', async function({content, userName, user, chatId, token}){
+            const loggedInUser = await validateToken(token);
+            if (!loggedInUser) return;
+            
+            const chat = await Chat.findById(chatId).populate('messages');
+            const newMessage = new Message( {
+                user,
+                userName,
+                content
+            })
+            await newMessage.save();
+            chat.messages.push(newMessage);
+            await chat.save();
             socket.join(chat._id, function() {
-            io.to(chat._id).emit("chat-clicked", chat);
+                io.to(chat._id).emit('send-message', chat);
+            });
         });
-      });
-
-       //-------------------------------------------------
-       //-------------------------------------------------
     });
 }
 

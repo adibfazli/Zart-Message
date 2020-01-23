@@ -14,10 +14,15 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: userService.getUser()
+      user: userService.getUser(),
+      chat: null
     };
   }
   
+  handleUpdateChat = (chat) => {
+    this.setState({chat});
+  }
+
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
   }
@@ -43,8 +48,12 @@ class App extends Component {
                 />
                 {userService.getUser() ?
               <div className='chatroom-chat'>
-                <ChatRooms />
-                <Chat />
+                <ChatRooms handleUpdateChat={this.handleUpdateChat} />
+                {this.state.chat ? 
+                <Chat
+                  chat={this.state.chat}
+                  handleUpdateChat={this.handleUpdateChat}
+                 /> : <p>Select a chat</p>}
               </div>
               :
               <Redirect to='/login' />

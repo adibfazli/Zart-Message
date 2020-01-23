@@ -6,6 +6,7 @@ const messageSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  userName: String,
   content: String,
 },{
   timestamps: true

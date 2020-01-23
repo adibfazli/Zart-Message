@@ -4,6 +4,7 @@ import service from "../../services/uaerService";
 import ChatService from '../../services/chatService'
 import socket from '../../socket';
 import chatService from '../../services/chatService';
+import uaerService from '../../services/uaerService';
 // import {Link} from 'react-router-dom'
 
 
@@ -11,9 +12,10 @@ class ChatRooms extends Component{
     state = {
         user: service.getUser(),
         search: '',
-        latestChat: null,
+        latestChats: null,
         chatsId: [],
-        clickedChatId : null
+        clickedChatId : null,
+        foundUser: null
     }
     
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -29,10 +31,16 @@ class ChatRooms extends Component{
     }
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     //                     handle Submit
-    handleSubmit = async (e) => {
+    handleSearchUsername = async (e) => {
         e.preventDefault();
         this.setState({search: this.state.search})
-        await socket.searchUser(this.state)
+        const foundUser = await uaerService.searchUser(this.state.search);
+        this.setState({foundUser})
+    }
+    handleOpenFoundChatroom = async (userId) => {
+        console.log(userId)
+        const foundChat = await chatService.findChat(userId);
+        this.props.handleUpdateChat(foundChat);
     }
     findClickedChat = async (e) =>{
         this.state.chatsId =  [this.state.clickedChatId]
@@ -44,6 +52,7 @@ class ChatRooms extends Component{
 
     componentDidMount = async() => {
         socket.registerChatrooms(this);
+        socket.getLatestChats({userId: uaerService.getUser()._id});
         // console.log("here : ",await  ChatService.getAllChats(this.state.user))
         const latestChat = await ChatService.getAllChats(this.state.user)
         this.setState({latestChat: latestChat})
@@ -56,16 +65,16 @@ class ChatRooms extends Component{
             <div className={styles.chatroom}>
                 <div className={styles.search}>
 
-                    <form onSubmit={this.handleSubmit} className={styles.searchForm} >
-                        <input type="text" placeholder='search' className={styles.searchInput} name='search' value={this.state.name} onChange={this.handleChange} />
+                    <form onSubmit={this.handleSearchUsername} className={styles.searchForm} >
+                        <input type="number" placeholder='search' className={styles.searchInput} name='search' value={this.state.name} onChange={this.handleChange} />
                         <button type='submit' className={styles.searchBtn}>&#128269;</button>
                     </form>
-
+                    {this.state.foundUser ? <button onClick={() => this.handleOpenFoundChatroom(this.state.foundUser._id)}>{this.state.foundUser.name}</button> : <p>gg</p>}
                 </div>
                 <div className={styles.chats}>
-                    {this.state.latestChat ?
+                    {this.state.latestChats ?
                         <ul>
-                            {this.state.latestChat.map(e => {
+                            {this.state.latestChats.map(e => {
                                 return (
                                 <li>
                                     <button onClick={this.handleChatClick} value={Object.values(e)[0]} >{Object.keys(e)[0]} </button>

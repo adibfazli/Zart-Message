@@ -8,7 +8,15 @@ module.exports = {
     editUser,
     getUser,
     searchUser,
+    findUser
   };
+
+async function findUser(req, res) {
+  console.log('inside finduser')
+  console.log(req.params.query)
+  const user = await User.findOne({phone: req.params.query});
+  res.json(user);
+}
 
   async function getUser(req, res) {
     console.log("req.user: ", req.user);

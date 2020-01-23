@@ -1,12 +1,21 @@
-// import tokenService from'./tokenService';
+import tokenService from'./tokenService';
 import chat from '../components/Chat/Chat'
-const BASE_URL = '/api/users/';
+
+const BASE_URL = '/api/chats/';
+
 
 export default {
     getAllChats,
     findClickedChat,
-
+    findChat,
 };
+
+async function findChat(userId) {
+    return await fetch (BASE_URL + 'findChat/userId/' + userId, {
+        method: 'GET',
+        headers: {Authorization: 'Bearer ' + tokenService.getToken()}
+    }).then(async res => await res.json())
+}
 
 async function getAllChats(user){
     return await fetch (BASE_URL + 'allChats', {
