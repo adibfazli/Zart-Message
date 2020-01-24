@@ -1,4 +1,4 @@
-# youpick
+# Zart Message
 ## Features
 Zart Message is a single page REACT application which can send message instantly to reciver useing sucket io to connect front-end and back-end.
 ## screenshot
