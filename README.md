@@ -14,7 +14,7 @@ Zart Message is a single page REACT application which can send message instantly
 * Mongo ATLAS
 * Heroku
 * oAuth
-* REACT
+* React.js
 * Trello
 * jsx
 * CSS3
