@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 const NavBar = (props) => {
+  console.log(props)
   let nav = props.user ?
     <div>
       <Link to=''
