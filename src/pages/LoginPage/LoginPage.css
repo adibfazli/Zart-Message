@@ -5,3 +5,32 @@
   align-items: center;
   margin-bottom: 50px;
 }
+.LoginPage input{
+  width: 200%;
+  height: 30px;
+  margin-left: -50%;
+  margin-bottom: 5px;
+  border-radius: 13px;
+}
+
+.header-footer{
+  color:black;
+  font-size: 40px;
+  font-weight: 900;
+  margin-top: -30px;
+  margin-bottom: 10px;
+}
+
+.link{
+  text-decoration: none;
+  color: black;
+  border : 1px solid black;
+  border-radius:10px ;
+  padding:3px;
+  transition: .5s;
+}
+.link:hover{
+  transition: .5s;
+  color:white;
+  background-color: black;
+}

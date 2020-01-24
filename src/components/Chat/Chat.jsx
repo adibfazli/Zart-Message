@@ -44,10 +44,9 @@ class Chat extends React.Component {
     render () {
         return (
         <div className={styles.chat}>
-            <div className={styles.chatInfo}>info</div>
+            {/* <div className={styles.chatInfo}>info</div> */}
             <div className={styles.MessageFeed}>
-            <p>MessageFeed</p>
-            <button onClick={()=>this.props.handleUpdateChat(null)}>X</button>
+            <button className={styles.X} onClick={()=>this.props.handleUpdateChat(null)}>X</button>
             <div className={styles.chatFeed}>
                 {this.state.messages ? 
                     <ul>
@@ -64,7 +63,7 @@ class Chat extends React.Component {
             </div>
             <form onSubmit={this.handleSendMessage} className={styles.sendForm}>
                 <input type="text" autoComplete="off" name="chatBox" value={this.state.chatBox} onChange={this.handleChange} className={styles.messageInput}/>
-                <button type='submit' className={styles.sendBtn}>submit</button>
+                <button type='submit' className={styles.sendBtn}>Send</button>
             </form>
         </div>
         );

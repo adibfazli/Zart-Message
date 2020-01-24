@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './LoginPage.css';
 import userService from '../../services/uaerService';
+import logo from '../../image/zartLogo.png'
 
 class LoginPage extends Component {
   
@@ -33,6 +34,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div className="LoginPage">
+        <img src={logo} className='logo'/>
         <header className="header-footer">Log In</header>
         <form className="form-horizontal" onSubmit={this.handleSubmit} >
           <div className="form-group">
@@ -48,8 +50,8 @@ class LoginPage extends Component {
           <div className="form-group">
             <div className="col-sm-12 text-center">
               <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
-              <Link to='/'>Cancel</Link>&nbsp;&nbsp;&nbsp;
-              <Link to='/signup'>signUp</Link>
+              <Link className='link' to='/'>Cancel</Link>&nbsp;&nbsp;&nbsp;
+              <Link className='link' to='/signup'>signUp</Link>
             </div>
           </div>
         </form>
