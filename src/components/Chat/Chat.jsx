@@ -48,17 +48,19 @@ class Chat extends React.Component {
             <div className={styles.MessageFeed}>
             <p>MessageFeed</p>
             <button onClick={()=>this.props.handleUpdateChat(null)}>X</button>
-            {this.state.messages ? 
-                <ul>
-                    {this.state.messages.map (message => 
-                        message.userName == uaerService.getUser().name ?
-                          <li className ={styles.greenChat} key={message._id}> <span className={styles.username}>{message.userName}:</span>&nbsp;<span>{message.content}</span> </li>
-                        : 
-                          <li className ={styles.whiteChat}Chat key={message._id} > <span className={styles.username}>{message.userName}:</span>&nbsp;<span>{message.content}</span> </li>
-                    )}
-                </ul>    
-                : <p>nothing in there</p>
-        }
+            <div className={styles.chatFeed}>
+                {this.state.messages ? 
+                    <ul>
+                        {this.state.messages.map (message => 
+                            message.userName == uaerService.getUser().name ?
+                            <li className ={styles.greenChat} key={message._id}> <span className={styles.username}>{message.userName}:</span>&nbsp;<span>{message.content}</span> </li>
+                            : 
+                            <li className ={styles.whiteChat}Chat key={message._id} > <span className={styles.username}>{message.userName}:</span>&nbsp;<span>{message.content}</span> </li>
+                        )}
+                    </ul>    
+                    : <p>nothing in there</p>
+                }
+            </div>
             </div>
             <form onSubmit={this.handleSendMessage} className={styles.sendForm}>
                 <input type="text" autoComplete="off" name="chatBox" value={this.state.chatBox} onChange={this.handleChange} className={styles.messageInput}/>
